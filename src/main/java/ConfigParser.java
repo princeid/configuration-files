@@ -96,10 +96,9 @@ public class ConfigParser {
                 }
                 thisLine = bufferedReader.readLine(); // Continues to next line
             }
-            System.out.println(map);
 
         } catch (Exception e) {
-            System.out.println("The filename '" + configFile + "' is not present on the file system! ");
+            System.err.println("The filename '" + configFile + "' is not present on the file system! ");
         } finally {
             if (fileReader != null) {
                 fileReader.close();
@@ -115,6 +114,10 @@ public class ConfigParser {
      * @return Returns the value from the map
      */
     public String get(String key) {
+        if (!map.containsKey(key)) {
+            System.err.println("\"Invalid key!\"");
+            System.exit(0);
+        }
         return map.get(key);
     }
 }

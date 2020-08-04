@@ -26,6 +26,6 @@ public class Main {
 
         ConfigParser config = new ConfigParser();
         System.out.println(config.loadConfiguration());
-        System.out.println(config.get("Loan"));
+        System.out.println(config.get("dbname"));
     }
 }
