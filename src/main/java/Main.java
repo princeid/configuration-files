@@ -24,8 +24,8 @@ public class Main {
             configFile = relativePath + developmentFile;
         }
 
-        ConfigParser config = new ConfigParser();
-        System.out.println(config.loadConfiguration());
+        ConfigParser config = new ConfigParser(configFile);
+        System.out.println(config.getMap());
         System.out.println(config.get("dbname"));
     }
 }

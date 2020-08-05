@@ -12,8 +12,3 @@ pipeline=fast
 
 [application]
 name=fintrack
-
-Tunji=Ola
-
-[Decagon]
-Loan=300000

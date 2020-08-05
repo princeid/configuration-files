@@ -1,7 +1,6 @@
 dbname=sq04_db-development
 host=127.0.0.1
 
-
 [application]
 name=fintek-development
 port=8082

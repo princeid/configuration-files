@@ -5,31 +5,31 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class ConfigParser {
-    private String configFile;
-    private FileReader fileReader = null;
-    private BufferedReader bufferedReader = null;
-    private HashMap<String, String> map = new LinkedHashMap<>();
+    String configFile;
+    FileReader fileReader = null;
+    BufferedReader bufferedReader = null;
+    HashMap<String, String> map = new LinkedHashMap<>();
 
     public String getConfigFile() {
         return configFile;
     }
 
-    public ConfigParser() {
-        this("src/main/config-files/config.txt");
+    public HashMap<String, String> getMap() {
+        return map;
     }
-    public ConfigParser(String configFile) {
-        this.configFile = configFile;
+
+    public ConfigParser() throws IOException {
+        this("src/main/config-files/config.txt");
     }
 
     /**
-     * @return
+     * On start of the application, the constructor below loads and stores key/values from the file on a map based on the environment
+     * specified. Where there are multiple values for a key, only the first key/value pair is added to the map.
+     * @param configFile The config file for the current environment
      * @throws IOException
-     *
-     * This method (loadConfiguration) returns a Map containing the key/value pairs of the configuration file. Where there are multiple values for
-     * a key, only the first one is added to the map.
      */
-    public HashMap<String, String> loadConfiguration() throws IOException {
-
+    public ConfigParser(String configFile) throws IOException {
+        this.configFile = configFile;
         try {
             fileReader = new FileReader(configFile);
             bufferedReader = new BufferedReader(fileReader);
@@ -44,7 +44,7 @@ public class ConfigParser {
              *  Loops until the end of the file.
              */
             while (thisLine != null) {
-                System.out.println(thisLine);
+//                System.out.println(thisLine);
 
                 /**
                  *  Checks if the current line being read is a sub heading or tag, for example "[application]" in order to extract the name and
@@ -54,7 +54,7 @@ public class ConfigParser {
                     prefix = thisLine.substring(1, thisLine.length()-1) + ".";  /* extracting the subheading/tag and concatenating with a dot "." */
                     thisLine = bufferedReader.readLine(); /* Continues to read next line after meeting the condition for a subheading/tag and
                     extracting the required portion */
-                    System.out.println(thisLine);
+//                    System.out.println(thisLine);
 
                     /**
                      *  The while loop below reads subsequent lines and processes their keys by concatenating the prefix with their respective keys
@@ -69,7 +69,7 @@ public class ConfigParser {
                                 value = thisLine.substring(index+1); /* Extracts the value portion from the current line being processed to form
                                 the value */
                                 thisLine = bufferedReader.readLine();
-                                System.out.println(thisLine);
+//                                System.out.println(thisLine);
                                 if (!map.containsKey(key)) { /* Checks if the map does not contain the current key being processed, and if true it
                                 adds the key and value to the map */
                                     map.put(key,value);
@@ -77,6 +77,7 @@ public class ConfigParser {
                             }
                         }
                     } catch (Exception e) {
+//                        System.out.println("End of File");
                     }
                 }
 
@@ -98,16 +99,15 @@ public class ConfigParser {
             }
 
         } catch (Exception e) {
-            System.err.println("The filename '" + configFile + "' is not present on the file system! ");
+            System.err.println("The filename \"" + configFile + "\" is not present on the file system! ");
         } finally {
             if (fileReader != null) {
                 fileReader.close();
                 bufferedReader.close();
             }
         }
-
-        return map;
     }
+
 
     /**
      * @param key The key in which the value to be returned is assigned
@@ -115,7 +115,7 @@ public class ConfigParser {
      */
     public String get(String key) {
         if (!map.containsKey(key)) {
-            System.err.println("\"Invalid key!\"");
+            System.err.println("Invalid key \"" + key + "\"");
             System.exit(0);
         }
         return map.get(key);
