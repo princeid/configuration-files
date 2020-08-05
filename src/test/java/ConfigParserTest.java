@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ConfigParserTest {
 
     /**
-     * Testing return values for
+     * Testing for all values in the production file
      * @throws IOException
      */
     @Test
@@ -29,6 +29,10 @@ class ConfigParserTest {
         );
     }
 
+    /**
+     * Testing for all values in the staging file
+     * @throws IOException
+     */
     @Test
     @DisplayName("Test results for staging values")
     void getStaging() throws IOException {
@@ -45,6 +49,10 @@ class ConfigParserTest {
         );
     }
 
+    /**
+     * Testing for all values in the development file
+     * @throws IOException
+     */
     @Test
     @DisplayName("Test results for development values")
     void getDevelopment() throws IOException {
