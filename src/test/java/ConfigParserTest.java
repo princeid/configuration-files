@@ -6,7 +6,7 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@DisplayName("Test results for production values")
+
 class ConfigParserTest {
 
     /**
