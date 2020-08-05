@@ -32,8 +32,9 @@ Specify the environment from the command line in args[0]. If no environment is s
 The below values will be returned from the map based on "development" environment. For duplicate keys, only the first one is added to the map:
 
 ```
-{dbname=sq04_db-development, host=127.0.0.1, application.name=fintek-development, application.port=8082, 
-application.context-url=/api/v1, mode=development, theme=yellow, pipeline=fast-development}
+{dbname=sq04_db-development, host=127.0.0.1, application.name=fintek-development, 
+application.port=8082, application.context-url=/api/v1, mode=development, theme=yellow, 
+pipeline=fast-development}
 
 ```
 
