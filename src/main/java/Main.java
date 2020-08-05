@@ -13,19 +13,21 @@ public class Main {
         String productionFile = "config.txt";
         String stagingFile = "config-staging.txt";
         String developmentFile = "config-development.txt";
-
-        String environment = args[0];
         String configFile = relativePath + productionFile;
+        String environment = "production";
 
-        if (environment.equalsIgnoreCase("staging")) {
+        if (args[0].equalsIgnoreCase("staging")) {
+            environment = "staging";
             configFile = relativePath + stagingFile;
         }
-        else if (environment.equalsIgnoreCase("development")) {
+
+        if (args[0].equalsIgnoreCase("development")) {
+            environment = "development";
             configFile = relativePath + developmentFile;
         }
 
         ConfigParser config = new ConfigParser(configFile);
         System.out.println(config.getMap());
-        System.out.println(config.get("dbname"));
+        System.out.println(config.get("application.name"));
     }
 }
